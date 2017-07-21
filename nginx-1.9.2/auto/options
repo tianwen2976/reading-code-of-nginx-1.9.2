@@ -20,6 +20,8 @@ CC=${CC:-cc}
 CPP=
 NGX_OBJS=objs
 
+echo "NGX_OBJS: $NGX_OBJS"
+
 NGX_DEBUG=NO
 NGX_CC_OPT=
 NGX_LD_OPT=
@@ -530,6 +532,8 @@ NGX_CONF_PATH=${NGX_CONF_PATH:-conf/nginx.conf}
 NGX_CONF_PREFIX=`dirname $NGX_CONF_PATH`
 NGX_PID_PATH=${NGX_PID_PATH:-logs/nginx.pid}
 NGX_LOCK_PATH=${NGX_LOCK_PATH:-logs/nginx.lock}
+
+echo "NGX_CONF_PREFIX: $NGX_CONF_PREFIX"
 
 if [ ".$NGX_ERROR_LOG_PATH" = ".stderr" ]; then
     NGX_ERROR_LOG_PATH=

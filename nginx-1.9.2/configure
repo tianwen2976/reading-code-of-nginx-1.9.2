@@ -9,6 +9,7 @@ export LC_ALL
 
 . auto/options          #auto/options脚本处理configure命令的参数。例如，如果参数是--help，那么显示支持的所有参数格式。options脚本会定义后续工作将要用到的变量，然后根据本次参数以及默认值设置这些变量
 . auto/init             #auto/init脚本初始化后续将产生的文件路径。例如，Makefile、ngx_modules.c等文件默认情况下将会在<nginx-source>/objs/
+exit 1
 . auto/sources          #auto/sources脚本将分析Nginx的源码结构，这样才能构造后续的Makefile文件
 
 #编译过程中所有目标文件生成的路径由—builddir=DIR参数指定，默认情况下为<nginx-source>/objs，此时这个目录将会被创建
