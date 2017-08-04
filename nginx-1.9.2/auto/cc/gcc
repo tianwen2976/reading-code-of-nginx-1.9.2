@@ -35,6 +35,7 @@ if [ $ngx_found = yes ]; then
     PIPE="-pipe"
 fi
 
+echo "NGX_MACHINE: $NGX_MACHINE"
 
 case "$NGX_MACHINE" in
 
@@ -54,6 +55,7 @@ NGX_GCC_OPT="-O"
 
 #CFLAGS="$CFLAGS -fomit-frame-pointer"
 
+echo "CPU: $CPU"
 case $CPU in
     pentium)
         # optimize for Pentium and Athlon
@@ -122,11 +124,15 @@ esac
 
 CFLAGS="$CFLAGS $PIPE $CPU_OPT"
 
+echo "CFLAGS: $CFLAGS"
+
 if [ ".$PCRE_OPT" = "." ]; then
     PCRE_OPT="-O2 -fomit-frame-pointer $PIPE $CPU_OPT"
 else
     PCRE_OPT="$PCRE_OPT $PIPE"
 fi
+
+echo "PCRE_OPT: $PCRE_OPT"
 
 if [ ".$MD5_OPT" = "." ]; then
     MD5_OPT="-O2 -fomit-frame-pointer $PIPE $CPU_OPT"
@@ -134,12 +140,15 @@ else
     MD5_OPT="$MD5_OPT $PIPE"
 fi
 
+echo "MD5_OPT: $MD5_OPT"
+
 if [ ".$ZLIB_OPT" = "." ]; then
     ZLIB_OPT="-O2 -fomit-frame-pointer $PIPE $CPU_OPT"
 else
     ZLIB_OPT="$ZLIB_OPT $PIPE"
 fi
 
+echo "ZLIB_OPT: $ZLIB_OPT"
 
 # warnings
 
@@ -150,6 +159,9 @@ CFLAGS="$CFLAGS -Wall -Wpointer-arith"
 #CFLAGS="$CFLAGS -Wconversion"
 #CFLAGS="$CFLAGS -Winline"
 #CFLAGS="$CFLAGS -Wmissing-prototypes"
+#
+
+echo "CFLAGS: $CFLAGS"
 
 
 case "$NGX_GCC_VER" in
@@ -181,6 +193,9 @@ CFLAGS="$CFLAGS -g"
 # DragonFly's gcc3 generates DWARF
 #CFLAGS="$CFLAGS -g -gstabs"
 
+echo "CFLAGS: $CFLAGS"
+
 if [ ".$CPP" = "." ]; then
     CPP="$CC -E"
 fi
+echo "CPP: $CPP"

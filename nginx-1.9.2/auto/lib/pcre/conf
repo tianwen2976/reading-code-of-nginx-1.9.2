@@ -3,6 +3,7 @@
 # Copyright (C) Nginx, Inc.
 
 
+echo "PCRE: $PCRE"
 if [ $PCRE != NONE ]; then
     CORE_INCS="$CORE_INCS $PCRE"
 

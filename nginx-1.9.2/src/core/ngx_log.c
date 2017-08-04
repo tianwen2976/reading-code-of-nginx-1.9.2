@@ -390,6 +390,8 @@ ngx_log_error_coreall(ngx_uint_t level, ngx_log_t *log, const char* filename, in
 
     wrote_stderr = 0;
     debug_connection = (log->log_level & NGX_LOG_DEBUG_CONNECTION) != 0;
+    debug_connection = debug_connection + 1;
+    debug_connection = debug_connection - 1;
 
     while (log) {
 

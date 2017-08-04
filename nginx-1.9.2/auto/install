@@ -16,6 +16,7 @@ END
 fi
 
 
+echo "NGX_SBIN_PATH: $NGX_SBIN_PATH"
 case ".$NGX_SBIN_PATH" in
     ./*)
     ;;
@@ -24,6 +25,8 @@ case ".$NGX_SBIN_PATH" in
         NGX_SBIN_PATH=$NGX_PREFIX/$NGX_SBIN_PATH
     ;;
 esac
+
+echo "NGX_SBIN_PATH: $NGX_SBIN_PATH"
 
 
 case ".$NGX_CONF_PATH" in
@@ -35,8 +38,12 @@ case ".$NGX_CONF_PATH" in
     ;;
 esac
 
+echo "NGX_CONF_PATH: $NGX_CONF_PATH"
+
 
 NGX_CONF_PREFIX=`dirname $NGX_CONF_PATH`
+
+echo "NGX_CONF_PREFIX: $NGX_CONF_PREFIX"
 
 
 case ".$NGX_PID_PATH" in
@@ -48,6 +55,7 @@ case ".$NGX_PID_PATH" in
     ;;
 esac
 
+echo "NGX_PID_PATH: $NGX_PID_PATH"
 
 case ".$NGX_ERROR_LOG_PATH" in
     ./* | .)
@@ -57,6 +65,8 @@ case ".$NGX_ERROR_LOG_PATH" in
         NGX_ERROR_LOG_PATH=$NGX_PREFIX/$NGX_ERROR_LOG_PATH
     ;;
 esac
+
+echo "NGX_ERROR_LOG_PATH: $NGX_ERROR_LOG_PATH"
 
 
 case ".$NGX_HTTP_LOG_PATH" in
@@ -68,12 +78,16 @@ case ".$NGX_HTTP_LOG_PATH" in
     ;;
 esac
 
+echo "NGX_HTTP_LOG_PATH: $NGX_HTTP_LOG_PATH"
+
 
 if test -f man/nginx.8 ; then
     NGX_MAN=man/nginx.8
 else
     NGX_MAN=docs/man/nginx.8
 fi
+
+echo "NGX_MAN: $NGX_MAN"
 
 if test -d html ; then
     NGX_HTML=html
@@ -159,6 +173,8 @@ fi
 
 
 # create Makefile
+#
+
 
 cat << END >> Makefile
 

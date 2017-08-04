@@ -9,16 +9,20 @@ export LC_ALL
 
 . auto/options          #auto/options脚本处理configure命令的参数。例如，如果参数是--help，那么显示支持的所有参数格式。options脚本会定义后续工作将要用到的变量，然后根据本次参数以及默认值设置这些变量
 . auto/init             #auto/init脚本初始化后续将产生的文件路径。例如，Makefile、ngx_modules.c等文件默认情况下将会在<nginx-source>/objs/
-exit 1
 . auto/sources          #auto/sources脚本将分析Nginx的源码结构，这样才能构造后续的Makefile文件
 
 #编译过程中所有目标文件生成的路径由—builddir=DIR参数指定，默认情况下为<nginx-source>/objs，此时这个目录将会被创建
 test -d $NGX_OBJS || mkdir $NGX_OBJS
 
+echo "NGX_OBJS: $NGX_OBJS"
+
 #开始准备建立ngx_auto_headers.h、autoconf.err等必要的编译文件
 #auto/init中定义了  NGX_AUTO_HEADERS_H和NGX_AUTOCONF_ERR变量
 echo > $NGX_AUTO_HEADERS_H        
 echo > $NGX_AUTOCONF_ERR
+
+echo "NGX_AUTO_HEADERS_H: $NGX_AUTO_HEADERS_H"
+echo "NGX_AUTOCONF_ERR: $NGX_AUTOCONF_ERR"
 
 #向objs/ngx_auto_config.h写入命令行带的参数
 echo "#define NGX_CONFIGURE \"$NGX_CONFIGURE\"" > $NGX_AUTO_CONFIG_H
@@ -27,6 +31,8 @@ echo "#define NGX_CONFIGURE \"$NGX_CONFIGURE\"" > $NGX_AUTO_CONFIG_H
 if [ $NGX_DEBUG = YES ]; then
     have=NGX_DEBUG . auto/have
 fi
+
+echo "have: $have"
 
 #现在开始检查操作系统参数是否支持后续编译
 if test -z "$NGX_PLATFORM"; then
@@ -53,7 +59,9 @@ else
 fi
 
 #检查并设置编译器，如GCC是否安装、GCC版本是否支持后续编译nginx
+echo "CC: $CC"
 . auto/cc/conf
+echo "LINK: $LINK"
 
 #对非Windows操作系统定义一些必要的头文件，并检查其是否存在，以此决定configure后续步骤是否可以成功
 if [ "$NGX_PLATFORM" != win32 ]; then
@@ -80,6 +88,8 @@ fi
 #conf脚本用来检查Nginx在链接期间需要链接的第三方静态库、动态库或者目标文件是否存在
 . auto/lib/conf
 
+
+echo "NGX_PREFIX: $NGX_PREFIX"
 #处理Nginx安装后的路径
 case ".$NGX_PREFIX" in
     .)
@@ -120,17 +130,22 @@ have=NGX_HTTP_UWSGI_TEMP_PATH value="\"$NGX_HTTP_UWSGI_TEMP_PATH\""
 have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\""
 . auto/define
 
+
 #创建编译时使用的objs/Makefile文件
 . auto/make
+
 
 #为objs/Makefile加入需要连接的第三方静态库、动态库或者目标文件
 . auto/lib/make
 
+
 #为objs/Makefile加入install功能，当执行make install时将编译生成的必要文件复制到安装路径，建立必要的目录
 . auto/install
 
+
 # STUB # 在ngx_auto_config.h文件中加入NGX_SUPPRESS_WARN宏、NGX_SMP宏
 . auto/stubs
+
 
 #在ngx_auto_config.h文件中指定NGX_USER和NGX_GROUP宏，如果执行configure时没有参数指定，默认两者皆为nobody（也就是默认以nobody用户运行进程）
 have=NGX_USER value="\"$NGX_USER\"" . auto/define

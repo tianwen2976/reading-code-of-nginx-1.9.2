@@ -6,6 +6,7 @@
 
 have=NGX_LINUX . auto/have_headers
 
+echo "UNIX_INCS: $UNIX_INCS"
 CORE_INCS="$UNIX_INCS"
 CORE_DEPS="$UNIX_DEPS $LINUX_DEPS"
 CORE_SRCS="$UNIX_SRCS $LINUX_SRCS"
@@ -13,8 +14,11 @@ CORE_SRCS="$UNIX_SRCS $LINUX_SRCS"
 ngx_spacer='
 '
 
+echo "cc_aux_flags: $cc_aux_flags"
 cc_aux_flags="$CC_AUX_FLAGS"
 CC_AUX_FLAGS="$cc_aux_flags -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64"
+
+echo "CC_AUX_FLAGS: $CC_AUX_FLAGS"
 
 
 # Linux kernel version
@@ -25,6 +29,8 @@ version=$((`uname -r \
              -e 's/^\([0-9][0-9]*\)\.\([0-9][0-9]*\).*/\1*256*256+\2*256/p'`))
 
 version=${version:-0}
+
+echo "version: $version"
 
 
 # posix_fadvise64() had been implemented in 2.5.60

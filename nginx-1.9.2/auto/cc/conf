@@ -31,6 +31,7 @@ ngx_long_cont=$ngx_cont
 
 . auto/cc/name        #从这里面获取编译器类型$NGX_CC_NAME
 
+echo "hello world"
 echo "yang .............................. $CFLAGS $NGX_CC_NAME $CFLAGS"
 #test –n 字符串  判断字符串的长度是否非零
 if test -n "$CFLAGS"; then  
@@ -72,6 +73,7 @@ if test -n "$CFLAGS"; then
 
 else
 
+    echo "CFLAGS is: $CFLAGS"
     case $NGX_CC_NAME in
         gcc)
             # gcc 2.7.2.3, 2.8.1, 2.95.4, egcs-1.1.2
@@ -135,8 +137,13 @@ else
 
 fi
 
+
+echo "CC_TEST_FLAGS: $CC_TEST_FLAGS"
+
 CFLAGS="$CFLAGS $NGX_CC_OPT"
 NGX_TEST_LD_OPT="$NGX_LD_OPT"
+
+echo "NGX_TEST_LD_OPT: $NGX_TEST_LD_OPT"
 
 if [ "$NGX_PLATFORM" != win32 ]; then
 
@@ -160,6 +167,7 @@ if [ "$NGX_PLATFORM" != win32 ]; then
 
     ngx_feature="gcc builtin atomic operations"
     ngx_feature_name=NGX_HAVE_GCC_ATOMIC
+    echo "NGX_HAVE_GCC_ATOMIC: $NGX_HAVE_GCC_ATOMIC"
     ngx_feature_run=yes
     ngx_feature_incs=
     ngx_feature_path=

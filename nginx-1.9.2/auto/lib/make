@@ -3,26 +3,32 @@
 # Copyright (C) Nginx, Inc.
 
 
+echo "PCRE: $PCRE"
 if [ $PCRE != NONE -a $PCRE != NO -a $PCRE != YES ]; then
     . auto/lib/pcre/make
 fi
 
+echo "MD5: $MD5"
 if [ $MD5 != NONE -a $MD5 != NO -a $MD5 != YES ]; then
     . auto/lib/md5/make
 fi
 
+echo "SHA1: $SHA1"
 if [ $SHA1 != NONE -a $SHA1 != NO -a $SHA1 != YES ]; then
     . auto/lib/sha1/make
 fi
 
+echo "OPENSSL: $OPENSSL"
 if [ $OPENSSL != NONE -a $OPENSSL != NO -a $OPENSSL != YES ]; then
     . auto/lib/openssl/make
 fi
 
+echo "ZLIB: $ZLIB"
 if [ $ZLIB != NONE -a $ZLIB != NO -a $ZLIB != YES ]; then
     . auto/lib/zlib/make
 fi
 
+echo "NGX_LIBATOMIC: $NGX_LIBATOMIC"
 if [ $NGX_LIBATOMIC != NO -a $NGX_LIBATOMIC != YES ]; then
     . auto/lib/libatomic/make
 fi

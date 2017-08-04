@@ -5,6 +5,9 @@
 
 NGX_USER=${NGX_USER:-nobody}
 
+echo "NGX_USER: $NGX_USER"
+echo "NGX_GROUP: $NGX_GROUP"
+
 if [ -z "$NGX_GROUP" ]; then
     if [ $NGX_USER = nobody ]; then
         if grep nobody /etc/group 2>&1 >/dev/null; then
@@ -505,6 +508,7 @@ ngx_param=NGX_PTR_SIZE; ngx_value=$ngx_size; . auto/types/value
 
 # POSIX types
 
+echo "NGX_AUTO_CONFIG_H: $NGX_AUTO_CONFIG_H"
 case "$NGX_AUTO_CONFIG_H" in
     /*)
         NGX_INCLUDE_AUTO_CONFIG_H="#include \"$NGX_AUTO_CONFIG_H\""
@@ -513,6 +517,7 @@ case "$NGX_AUTO_CONFIG_H" in
         NGX_INCLUDE_AUTO_CONFIG_H="#include \"../$NGX_AUTO_CONFIG_H\""
     ;;
 esac
+echo "NGX_INCLUDE_AUTO_CONFIG_H: $NGX_INCLUDE_AUTO_CONFIG_H"
 
 ngx_type="uint64_t"; ngx_types="u_int64_t"; . auto/types/typedef
 

@@ -8,6 +8,8 @@ echo "checking for $NGX_SYSTEM specific features"
 #yang test ...........xxxxxxxxxxxxxxxxxxx..........Linux:2.6.33.4-smp:i686
 #echo "yang test ...........xxxxxxxxxxxxxxxxxxx..........$NGX_PLATFORM"
 
+echo "NGX_PLATFORM: $NGX_PLATFORM"
+
 case "$NGX_PLATFORM" in
 
     FreeBSD:*)
@@ -15,6 +17,7 @@ case "$NGX_PLATFORM" in
     ;;
 
     Linux:*)
+        echo "run os/linux"
         . auto/os/linux
     ;;
 
@@ -81,6 +84,7 @@ case "$NGX_PLATFORM" in
 esac
 
 
+echo "NGX_MACHINE: $NGX_MACHINE"
 case "$NGX_MACHINE" in
 
     i386 | i686 | i86pc)
